@@ -27,7 +27,7 @@ RSpec.describe SessionsController, type: :controller do
     context "valid log in params" do
 
       before do
-        post :create, valid_params
+        post :create, {params: valid_params}
       end
 
       it "sets session user_id" do
@@ -48,7 +48,7 @@ RSpec.describe SessionsController, type: :controller do
     context "invalid log in params" do
 
       before do
-        post :create, invalid_params
+        post :create, {params: invalid_params}
       end
 
       it "does not set session user_id" do
@@ -71,7 +71,7 @@ RSpec.describe SessionsController, type: :controller do
   describe "DELETE #destroy" do
 
     before do
-      post :create, valid_params
+      post :create, {params: valid_params}
       delete :destroy
     end
 
