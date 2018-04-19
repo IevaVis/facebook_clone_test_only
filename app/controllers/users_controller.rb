@@ -25,8 +25,8 @@ class UsersController < ApplicationController
 	def update
 		@user = User.find(params[:id])
 		if @user.update_attributes(valid_params)
-			redirect_to user_path(@user)
 			flash[:notice] = "Account is updated successfully."
+			redirect_to user_path(@user)
 		else
 			render template: "users/edit"
 		end
