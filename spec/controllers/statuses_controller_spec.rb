@@ -66,7 +66,7 @@ RSpec.describe StatusesController, type: :controller do
   describe "GET #edit" do
     before do
       session[:user_id] = user.id
-      status = FactoryGirl.create(:status, :id=> user.id)
+      status = FactoryBot.create(:status, :id=> user.id)
       get :edit, {:id => status.to_param}
     end
 
@@ -88,14 +88,14 @@ RSpec.describe StatusesController, type: :controller do
   # happy_path
     context "with valid update params" do
       it "updates the requested status" do
-        status = FactoryGirl.create(:status, :id=> user.id)
+        status = FactoryBot.create(:status, :id=> user.id)
         put :update, {:id => status.to_param, :status => valid_params_update}
         status.reload
         expect( status.title).to eq valid_params_update[:title]
       end
 
       it 'redirects to status path and displays flash notice after status is updated successfully' do
-        status = FactoryGirl.create(:status, :id=> user.id)
+        status = FactoryBot.create(:status, :id=> user.id)
         put :update, {:id => status.to_param, :status=> valid_params_update}
         status.reload
         expect(response).to redirect_to(status_path(status))
@@ -105,7 +105,7 @@ RSpec.describe StatusesController, type: :controller do
     # unhappy_path
     context "with invalid update params" do
       it "re-renders the 'edit' template" do
-        status = FactoryGirl.create(:status, :id=> user.id)
+        status = FactoryBot.create(:status, :id=> user.id)
         put :update, {:id => status.to_param, :status=> invalid_params_update}
         expect(response).to render_template("edit")
       end
@@ -120,14 +120,14 @@ RSpec.describe StatusesController, type: :controller do
     end
 
     it "destroys the requested status" do
-      status = FactoryGirl.create(:status, :id=> user.id)
+      status = FactoryBot.create(:status, :id=> user.id)
       expect {
         delete :destroy, {:id => status.to_param}
       }.to change(Status, :count).by(-1)
     end
 
     it "redirects to the statuses_path" do
-      status = FactoryGirl.create(:status, :id=> user.id)
+      status = FactoryBot.create(:status, :id=> user.id)
       delete :destroy, {:id => status.to_param}
       expect(response).to redirect_to(statuses_path)
       expect(flash[:notice]).to eq "Status is deleted."

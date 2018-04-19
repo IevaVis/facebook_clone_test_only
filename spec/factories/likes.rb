@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :like do
     user_id 1
     status_id 1

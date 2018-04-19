@@ -8,7 +8,7 @@ RSpec.describe "welcome/index.html.erb", type: :view do
 
   context "logged in" do
     it "display log out button" do
-      user = FactoryGirl.create(:user)
+      user = FactoryBot.create(:user)
       session[:user_id] = user.id
       render
       expect(rendered).to have_link("Log Out", href: signout_path)
